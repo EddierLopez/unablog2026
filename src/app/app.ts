@@ -9,15 +9,19 @@ import { CategoryService } from './services/category.service';
   styleUrl: './app.css'
 })
 export class App {
-  public categories:any
-  protected readonly title = signal('webapp');
-  constructor(private categoryService:CategoryService){
+  public categories:any  
+  protected readonly title = signal('webapp');  
+
+  constructor(private categoryService:CategoryService){    
     this.loadCategories()
-  }
-  loadCategories(){
+  } 
+  
+
+  loadCategories(){    
     this.categoryService.getCategories().subscribe({
-      next:(response:any)=>{
-        console.log('Respuesta---->',response)
+      next:(response:any)=>{       
+        this.categories=response 
+        console.log('Respuesta---->',this.categories)        
       },
       error:(err:Error)=>{
         console.log('Error---->',err)
