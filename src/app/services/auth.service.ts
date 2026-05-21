@@ -32,4 +32,13 @@ export class AuthService{
             )
         )
     }
+    logout():void{
+        this.currentUser.set(null)
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('identity')
+    }
+    isAuthenticated():boolean{
+        return !!sessionStorage.getItem('token')
+    }
+
 }

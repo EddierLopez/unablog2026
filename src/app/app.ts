@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CategoryService } from './services/category.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,12 @@ import { CategoryService } from './services/category.service';
   styleUrl: './app.css'
 })
 export class App {
-  public categories:any  
+  public categories:any    
   protected readonly title = signal('webapp');  
-
-  constructor(private categoryService:CategoryService){    
-    this.loadCategories()
+  public currentUser
+  constructor(private categoryService:CategoryService,private _auth:AuthService){    
+    this.loadCategories()    
+    this.currentUser=_auth.currentUser
   } 
   
 
