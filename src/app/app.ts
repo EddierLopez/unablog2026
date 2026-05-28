@@ -10,19 +10,29 @@ import { AuthService } from './services/auth.service';
   styleUrl: './app.css'
 })
 export class App {
-  public categories:any    
+  public categories=signal<any|null>(null) 
   protected readonly title = signal('webapp');  
   public currentUser
+  private checkCat
+  private checkSessionInterval
   constructor(private categoryService:CategoryService,private _auth:AuthService){    
-    this.loadCategories()    
+    this.loadCategories()
+    this.checkCat=setInterval(()=>{this.loadCategories()},10000)    
     this.currentUser=_auth.currentUser
+    this.checkSessionInterval=setInterval(()=>{this.checkSession()},1000)
   } 
   
+  checkSession(){
+    if(!this._auth.isAuthenticated()){
+      this._auth.logout()
+      this.currentUser.set(null)
+    }
+  }
 
   loadCategories(){    
     this.categoryService.getCategories().subscribe({
       next:(response:any)=>{       
-        this.categories=response 
+        this.categories.set(response)
         console.log('Respuesta---->',this.categories)        
       },
       error:(err:Error)=>{

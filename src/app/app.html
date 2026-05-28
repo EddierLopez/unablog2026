@@ -17,7 +17,7 @@
                     </button>
                     <div class="subnav-content">
                         <span>
-                            @for(item of categories;track $index){
+                            @for(item of categories();track $index){
                                 <a [routerLink]="['/categoria/'+item.id]">{{item.name}}</a>
                             }
                         </span>
@@ -27,7 +27,7 @@
             <!--Se muestra si no ha iniciado sesion-->
             @if(!currentUser()){
                 <li class="nav-item">
-                    <a class="nav-link">Registro</a>
+                    <a [routerLink]="['/register']" class="nav-link">Registro</a>
                 </li>
                 
                 <li class="nav-item">
@@ -49,9 +49,10 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" >Cambiar contraseña</a> 
-                    @if(currentUser()?.role==='admin_role'){
+                    @if(currentUser()?.role==='ADMIN_ROLE'){
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" >Configuración</a>
+                        <a class="dropdown-item" >Administración de usuarios</a>
                     }       
                     
                     </div>
