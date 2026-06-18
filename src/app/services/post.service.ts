@@ -12,4 +12,7 @@ export class PostService{
     getPosts():Observable<any>{
         return this._http.get(this.url+"post")
     }
+    getPost(id:number):Observable<any>{
+        return this._http.get(this.url+"post/detail/"+id)
+    }
 }

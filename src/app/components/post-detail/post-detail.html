@@ -1,1 +1,38 @@
-<p>post-detail works!</p>
+<div class="container mt-2 col-md-10">
+    @if(!post()){
+        <div class="loading">
+            <p>No existe post seleccionado</p>
+     </div>
+    }
+    @else {
+        <header>
+            <h2 class="card-title">{{post().title}}</h2>
+        </header>
+        <article>
+            <p>Posteado por: {{post().user_id}}</p>
+            <hr>
+            <img src="../Image_not_available.png" style="width: 450px;" alt="">
+            <p class="card-body">{{post().content.String}}</p>
+            <p class="">Fecha de creación: {{post().created_at.Time.split("T")[0]}}</p>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control">
+                    <input type="submit" value="Comentar" class="btn btn-primary mt-2">
+                </div>
+            </form>
+        </article>
+        <footer class="card-footer">            
+            <div class="container col-md-10 mt-2" style="border: 1px solid lightgrey; border-radius: 5px;">
+                <h6 style="color: gray;" class="mt-2">Comentarios</h6>
+                <hr>
+                @if(!postComments()){
+                    <p>No existen comentarios por mostrar!</p>
+                }@else {
+                    <!--Llenar los comentarios relacionados-->
+                }
+                
+            </div>
+        </footer>
+    }
+
+</div>

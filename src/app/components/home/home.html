@@ -1,4 +1,4 @@
-@if(!posts){
+@if(!posts()){
     <div class="loading">
         <p>Cargando los datos...</p>
     </div>
@@ -8,16 +8,17 @@
         <div class="row d-flex">
             <span>
                 <div class="col">
-                  @for(post of posts; track $index){
+                  @for(post of posts(); track $index){
                     <div class="card mb-4" style="width: 18rem;">
                         <!--Agregar un img del post-->
+                        <img src="Image_not_available.png" alt="No Imagen" style="width:200px;margin: 10px auto;">
                         <div class="card-body">
                             <h5 class="card-title">{{post.title}}</h5>
                             <p>Creado: {{post.created_at}}</p>
                             <a class="btn btn-primary" [routerLink]="['/detalle/'+post.id]">Ver</a>
                             <!--Mostar el boton de editar y borrar al usuario
                             dueño del post-->
-
+                            
                         </div>
                     </div>
                   }  
